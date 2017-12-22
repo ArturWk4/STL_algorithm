@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1513973820 source:d:\artur\programs\codeblocks\myprojects\algorithms_stl\main.cpp
+	<iostream>
+	"algorithms.h"
+
+1513973820 d:\artur\programs\codeblocks\myprojects\algorithms_stl\algorithms.h
+
