@@ -150,8 +150,8 @@ Iter adjacent_find(Iter first, Iter last)
 
 /** Modifying sequence operations **/
 
-template<class T>
-void reverse(T first, T last)
+template<class ForwardIt>
+void reverse(ForwardIt first, ForwardIt last)
 {
     while((first != last) && (first != --last))
     {
@@ -395,12 +395,12 @@ T max(T& first, T& second)
     return second;
 }
 
-template<class T>
-T max_element(T first, T last)
+template<class InputIterator>
+InputIterator max_element(InputIterator first, InputIterator last)
 {
     if(first == last)
         return last;
-    T max_value = first;
+    InputIterator max_value = first;
     ++first;
     for(; first < last; ++first)
     {
@@ -418,12 +418,12 @@ T min(T& first, T& second)
     return second;
 }
 
-template<class T>
-T min_element(T first, T last)
+template<class InputIt>
+InputIt min_element(InputIt first, InputIt last)
 {
     if(first == last)
         return last;
-    T min_value = first;
+    InputIt min_value = first;
     ++first;
     for(; first < last; ++first)
     {
