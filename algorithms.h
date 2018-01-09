@@ -25,7 +25,29 @@ bool equal(InputIt first1, InputIt last1, InputIt first2)
     }
     return true;
 }
+template<class InputIt, class T>
+int count(InputIt first, InputIt last, T& value)
+{
+    int counter = 0;
+    for(;first != last;++first)
+    {
+        if(*first == value)
+            ++counter;
+    }
+    return counter;
+}
 
+template<class InputIt, class UnaryFunc>
+int count_if(InputIt first, InputIt last, UnaryFunc func)
+{
+    int counter = 0;
+    for(;first != last;++first)
+    {
+        if(func(*first))
+            ++counter;
+    }
+    return counter;
+}
 
 template<class InputIterator, class T>
 InputIterator find(InputIterator first,InputIterator last, T& value)
