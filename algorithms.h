@@ -29,7 +29,7 @@ template<class InputIt, class T>
 int count(InputIt first, InputIt last, T& value)
 {
     int counter = 0;
-    for(;first != last;++first)
+    for(; first != last; ++first)
     {
         if(*first == value)
             ++counter;
@@ -41,7 +41,7 @@ template<class InputIt, class UnaryFunc>
 int count_if(InputIt first, InputIt last, UnaryFunc func)
 {
     int counter = 0;
-    for(;first != last;++first)
+    for(; first != last; ++first)
     {
         if(func(*first))
             ++counter;
@@ -110,7 +110,6 @@ Iter1 search(Iter1 first, Iter1 last, Iter2 s_first, Iter2 s_last)
                 break;
         }
     }
-
 }
 
 template<class ForwardIterator, class Amount, class T>
@@ -177,28 +176,35 @@ void reverse(ForwardIt first, ForwardIt last)
 {
     while((first != last) && (first != --last))
     {
-       swap(*first++, *last);
+        swap(*first++, *last);
     }
 }
 
-template <class ForwardIterator>
-void rotate(ForwardIterator first, ForwardIterator _first, ForwardIterator last)
+template <class ForwardIt>
+ForwardIt rotate(ForwardIt first, ForwardIt n_first, ForwardIt last)
 {
-    ForwardIterator next = _first;
-   for(; first != next; ++first)
-   {
-        swap(*first++, *next++);
-        if (next == last)
-        {
-            next = _first;
-        }
+    if(first == n_first) return last;
+    if(n_first == last) return first;
 
-        else if (first == _first)
+    ForwardIt next = n_first;
 
-        {
-            _first = next;
-        }
+    do
+    {
+        iter_swap(first++, next++);
+        if (first == n_first) n_first = next;
     }
+    while (next != last);
+
+    ForwardIt ret = first;
+
+    for(next = n_first; next != last; )
+    {
+        iter_swap(first++, next++);
+        if(first == n_first) n_first = next;
+        else if(next == last) next = n_first;
+    }
+
+    return ret;
 }
 
 template <class ForwardIter, class OutputIter>
@@ -263,7 +269,7 @@ void swap(T& first, T& last)
 template <class ForwardIterator, class _ForwardIterator>
 void iter_swap(ForwardIterator a, _ForwardIterator b)
 {
-   swap(*a, *b);
+    swap(*a, *b);
 }
 
 template <class ForwardIterator>
@@ -278,7 +284,7 @@ ForwardIterator unique(ForwardIterator first, ForwardIterator last)
         if (!(*result == *first))
             *(++result) = *first;
 
-     }
+    }
     return ++result;
 }
 
@@ -293,7 +299,7 @@ ForwardIterator unique_copy(ForwardIterator first, ForwardIterator last, OutputI
     {
         if (!(*_first == *first))
             *(++_first) = *first;
-     }
+    }
     return _first;
 }
 
@@ -306,7 +312,6 @@ ForwardIterator remove(ForwardIterator first, ForwardIterator last, const T& v)
         if(!(*first == v))
         {
             *result++ = *first;
-
         }
     }
     return result;
@@ -455,6 +460,15 @@ InputIt min_element(InputIt first, InputIt last)
     return min_value;
 }
 
+template<class T>
+std::pair<const T&, const T&> minmax( const T& a, const T& b )
+{
+    if(b < a)
+        return std::pair<const T&, const T&>(b, a);
+    else
+        return std::pair<const T&, const T&>(a, b);
+}
+
 /** Sorting operations **/
 
 template<class InputIt>
@@ -572,9 +586,9 @@ bool next_permutation(BidirIterator first, BidirIterator last)
         if (*--i < *i1)
         {
             i2 = last;
-           while(!(*i < *--i2))//???
+            while(!(*i < *--i2))//???
 
-            iter_swap(i, i2);
+                iter_swap(i, i2);
             reverse(i1, last);
             return true;
         }
