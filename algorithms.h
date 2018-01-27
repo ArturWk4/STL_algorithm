@@ -266,12 +266,19 @@ void swap(T& first, T& last)
     first = last;
     last = temp;
 }
-
+template<class T>
+void iter_swap(T* first, T* second)
+{
+    T temp = *first;
+    *first = *second;
+    *second = temp;
+}
+/*
 template <class ForwardIterator, class _ForwardIterator>
 void iter_swap(ForwardIterator a, _ForwardIterator b)
 {
     swap(*a, *b);
-}
+}*/
 
 template <class ForwardIterator>
 ForwardIterator unique(ForwardIterator first, ForwardIterator last)
@@ -478,6 +485,8 @@ std::pair<const T&, const T&> minmax( const T& a, const T& b, Compare comp )
     else
         return std::pair<const T&, const T&>(a, b);
 }
+
+
 /** Sorting operations **/
 
 template<class InputIt>
