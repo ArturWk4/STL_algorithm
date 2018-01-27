@@ -469,6 +469,14 @@ std::pair<const T&, const T&> minmax( const T& a, const T& b )
         return std::pair<const T&, const T&>(a, b);
 }
 
+template<class T, class Compare>
+std::pair<const T&, const T&> minmax( const T& a, const T& b, Compare comp )
+{
+    if comp(b, a)
+        return std::pair<const T&, const T&>(b, a);
+    else
+        return std::pair<const T&, const T&>(a, b);
+}
 /** Sorting operations **/
 
 template<class InputIt>
