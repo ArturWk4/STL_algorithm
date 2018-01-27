@@ -1,5 +1,6 @@
 #ifndef ALGORITHMS_H_INCLUDED
 #define ALGORITHMS_H_INCLUDED
+#include <utility>
 
 /** Non-modifying sequence operations **/
 
