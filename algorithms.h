@@ -486,6 +486,22 @@ std::pair<const T&, const T&> minmax( const T& a, const T& b, Compare comp )
         return std::pair<const T&, const T&>(a, b);
 }
 
+template<class ForwardIt>
+std::pair<ForwardIt, ForwardIt> minmax_element(ForwardIt first, ForwardIt last)
+{
+    ForwardIt min_value = first;
+    ForwardIt max_value = first;
+    ++first;
+    for(; first < last; ++first)
+    {
+        if(*min_value > *first)
+            min_value = first;
+        if(*max_value < *first)
+            max_value = first;
+    }
+    std::pair<ForwardIt,ForwardIt> result(min_value, max_value);
+    return result;
+}
 
 /** Sorting operations **/
 
